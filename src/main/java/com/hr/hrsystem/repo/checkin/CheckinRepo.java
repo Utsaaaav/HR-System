@@ -10,8 +10,9 @@ import java.util.Optional;
 
 public interface CheckinRepo extends JpaRepository<Checkin, Integer> {
 
-    @Query(value = "SELECT c FROM Checkin c WHERE c.user = :user ORDER BY c.checkinTime DESC limit 1",
-    nativeQuery = true)
+    @Query("SELECT c FROM Checkin c WHERE c.user = :user ORDER BY c.checkinTime DESC")
     Optional<Checkin> findTopByUserOrderByCheckinTimeDesc(@Param("user") User user);
+
+   // Optional<Checkin> findTopByUserOrderByCheckinTimeDesc(@Param("user") User user);
 
 }

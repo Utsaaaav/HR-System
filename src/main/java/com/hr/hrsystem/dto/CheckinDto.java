@@ -14,6 +14,7 @@ public class CheckinDto {
 
     private int id;
     private int userId;
+    private String userName;
     private LocalDateTime checkinTime;
 
 }

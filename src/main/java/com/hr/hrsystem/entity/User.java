@@ -32,8 +32,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
+//    @Column(name = "imageUrl")
+//    private String imageUrl;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "role")

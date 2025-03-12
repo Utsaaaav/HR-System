@@ -20,7 +20,7 @@ public class Checkin {
     private int id;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_CHECKIN_USER_ID"))
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "FK_CHECKIN_USER_ID"))
     private User user;
 
     @Column(nullable = false)

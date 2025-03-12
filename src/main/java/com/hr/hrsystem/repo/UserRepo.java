@@ -18,6 +18,4 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     @Query(value = "select u.username as username from tbl_user u;", nativeQuery = true)
     List<UserProjection> findAllProjections();
 
-
-
 }
