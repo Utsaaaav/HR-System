@@ -1,5 +1,6 @@
 package com.hr.hrsystem.entity;
 
+import com.hr.hrsystem.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 
-public class Checkout {
+public class Checkout extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

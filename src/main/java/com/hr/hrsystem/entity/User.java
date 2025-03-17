@@ -1,5 +1,6 @@
 package com.hr.hrsystem.entity;
 
+import com.hr.hrsystem.audit.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int id;
 

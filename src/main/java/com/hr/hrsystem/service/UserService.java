@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public interface UserService {
 
-    boolean saveUser(User user);
+    boolean saveUser(UserDto user);
 
     List<UserDto> getAllUser();
 

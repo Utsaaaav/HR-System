@@ -34,19 +34,17 @@ public class UserController extends BaseClass {
 
     @PostMapping("/register")
     public ResponseEntity<?> signup(@RequestBody UserDto user) {
-        User newUser = new User();
-        newUser.setUserName(user.getUserName());
-        newUser.setPassword(user.getPassword());
 
-        userService.saveUser(newUser);
+
+        userService.saveUser(user);
         return new ResponseEntity<>("Created", HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUserName(), userDto.getPassword()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userDto.getUserName());
             String jwt = jwtUtil.generateToken(userDetails.getUsername());
             return new ResponseEntity<>(jwt, HttpStatus.OK);
         } catch (Exception e) {

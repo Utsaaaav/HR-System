@@ -34,10 +34,11 @@ public class CheckoutServiceImpl implements CheckoutService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Optional<Checkin> lastCheckin = checkinRepo.findTopByUserOrderByCheckinTimeDesc(user);
+
         if(lastCheckin.isEmpty()){
             throw new RuntimeException("User has not checked in yet.");
         }
-
+        
         Checkout checkout = Checkout.builder()
                 .user(user)
                 .checkoutTime(LocalDateTime.now())
