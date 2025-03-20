@@ -1,4 +1,4 @@
-package com.hr.hrsystem.service;
+package com.hr.hrsystem.service.file;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @Service
-public class FileServiceImpl implements FileService{
+public class FileServiceImpl implements FileService {
 
     //upload file
     @Override

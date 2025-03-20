@@ -1,7 +1,9 @@
 package com.hr.hrsystem.dto;
 
-import com.hr.hrsystem.entity.User;
 import lombok.*;
+
+import java.util.Date;
+
 
 @Builder
 @Getter
@@ -17,6 +19,14 @@ public class UserDto {
 
     private String password;
 
+    private Date createdDate;
+
+    private Date modifiedDate;
+
+    private String createdBy;
+
+    private String modifiedBy;
+
 
 //    public User toEntity(){
 //
@@ -29,7 +39,6 @@ public class UserDto {
 //                .build();
 
 //    }
-
 
 
 }

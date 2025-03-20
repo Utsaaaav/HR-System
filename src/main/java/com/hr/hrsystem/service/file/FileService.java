@@ -1,4 +1,4 @@
-package com.hr.hrsystem.service;
+package com.hr.hrsystem.service.file;
 
 import org.springframework.web.multipart.MultipartFile;
 

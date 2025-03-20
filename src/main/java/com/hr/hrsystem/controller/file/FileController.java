@@ -1,8 +1,9 @@
-package com.hr.hrsystem.controller;
+package com.hr.hrsystem.controller.file;
 
 
 import com.hr.hrsystem.payload.FileResponse;
-import com.hr.hrsystem.service.FileService;
+import com.hr.hrsystem.service.file.FileService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,12 +14,12 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 @RestController
 @RequestMapping("/file")
+@Tag(name = "File API")
 public class FileController {
 
     @Autowired

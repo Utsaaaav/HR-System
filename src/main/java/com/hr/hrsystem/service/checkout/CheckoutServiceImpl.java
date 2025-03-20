@@ -4,7 +4,7 @@ import com.hr.hrsystem.dto.CheckoutDto;
 import com.hr.hrsystem.entity.Checkin;
 import com.hr.hrsystem.entity.Checkout;
 import com.hr.hrsystem.entity.User;
-import com.hr.hrsystem.repo.UserRepo;
+import com.hr.hrsystem.repo.user.UserRepo;
 import com.hr.hrsystem.repo.checkin.CheckinRepo;
 import com.hr.hrsystem.repo.checkout.CheckoutRepo;
 import org.springframework.stereotype.Service;

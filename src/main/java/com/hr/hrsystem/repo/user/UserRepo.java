@@ -1,4 +1,4 @@
-package com.hr.hrsystem.repo;
+package com.hr.hrsystem.repo.user;
 
 import com.hr.hrsystem.entity.User;
 import com.hr.hrsystem.projection.UserProjection;

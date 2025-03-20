@@ -1,11 +1,13 @@
-package com.hr.hrsystem.controller;
+package com.hr.hrsystem.controller.user;
 
+import com.hr.hrsystem.controller.BaseClass;
 import com.hr.hrsystem.dto.GlobalApiResponse;
+import com.hr.hrsystem.dto.ResponseJwtDto;
 import com.hr.hrsystem.dto.UserDto;
-import com.hr.hrsystem.entity.User;
 import com.hr.hrsystem.projection.UserProjection;
-import com.hr.hrsystem.service.UserService;
+import com.hr.hrsystem.service.user.UserService;
 import com.hr.hrsystem.utils.JwtUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Tag(name = "User APIs")
 public class UserController extends BaseClass {
 
     @Autowired
@@ -35,37 +38,40 @@ public class UserController extends BaseClass {
     @PostMapping("/register")
     public ResponseEntity<?> signup(@RequestBody UserDto user) {
 
-
         userService.saveUser(user);
         return new ResponseEntity<>("Created", HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
+    public ResponseEntity<ResponseJwtDto> login(@RequestBody UserDto userDto) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUserName(), userDto.getPassword()));
             UserDetails userDetails = userDetailsService.loadUserByUsername(userDto.getUserName());
+
             String jwt = jwtUtil.generateToken(userDetails.getUsername());
-            return new ResponseEntity<>(jwt, HttpStatus.OK);
+
+            ResponseJwtDto responseJwtDto = new ResponseJwtDto("Success", jwt);
+            return new ResponseEntity<>(responseJwtDto, HttpStatus.OK);
+
         } catch (Exception e) {
-            return new ResponseEntity<>("Incorrect username and password", HttpStatus.BAD_REQUEST);
+            ResponseJwtDto responseDto = new ResponseJwtDto("Incorrect Username Or Password", null);
+            return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/users")
-    public ResponseEntity<GlobalApiResponse> listAllUser(){
+    public ResponseEntity<GlobalApiResponse> listAllUser() {
 
         List<UserDto> user = userService.getAllUser();
-        if(user != null){
+        if (user != null) {
 
             return new ResponseEntity<>(
-                    successResponse("User List Fetched Successfully",user),
+                    successResponse("User List Fetched Successfully", user),
                     HttpStatus.OK);
-        }
-        else {
+        } else {
 
             return new ResponseEntity<>(
-                    failureResponse("Failed To Fetch User List",null),
+                    failureResponse("Failed To Fetch User List", null),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
 
@@ -73,20 +79,19 @@ public class UserController extends BaseClass {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<GlobalApiResponse> updateUser(@RequestBody UserDto userDto){
+    public ResponseEntity<GlobalApiResponse> updateUser(@RequestBody UserDto userDto) {
 
-        userService.updateUser(userDto);
+         userService.updateUser(userDto);
 
-        if(userDto != null){
-
-            return new ResponseEntity<>(
-                    successResponse("Updated Successfully",userDto)
-                    ,HttpStatus.OK);
-        }
-        else{
+        if (userDto != null) {
 
             return new ResponseEntity<>(
-                    failureResponse("Failed to update",null),
+                    successResponse("Updated Successfully", userDto)
+                    , HttpStatus.OK);
+        } else {
+
+            return new ResponseEntity<>(
+                    failureResponse("Failed to update", null),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -94,20 +99,19 @@ public class UserController extends BaseClass {
     }
 
     @GetMapping("/projection")
-    public ResponseEntity<GlobalApiResponse> viewAll(){
+    public ResponseEntity<GlobalApiResponse> viewAll() {
 
-       List<UserProjection> user = userService.findAllUsers();
-       if(user != null){
+        List<UserProjection> user = userService.findAllUsers();
+        if (user != null) {
 
-           return new ResponseEntity<>(
-                   successResponse("Data Fetched Successfully",user),
-                   HttpStatus.OK);
-       }
-       else{
+            return new ResponseEntity<>(
+                    successResponse("Data Fetched Successfully", user),
+                    HttpStatus.OK);
+        } else {
 
-           return new ResponseEntity<>(failureResponse("Failed to Fetch",null)
-           ,HttpStatus.OK);
-       }
+            return new ResponseEntity<>(failureResponse("Failed to Fetch", null)
+                    , HttpStatus.OK);
+        }
     }
 
 //    @PostMapping("/create")

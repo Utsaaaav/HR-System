@@ -4,11 +4,13 @@ import com.hr.hrsystem.dto.CheckinDto;
 import com.hr.hrsystem.dto.UserDto;
 import com.hr.hrsystem.repo.checkin.CheckinRepo;
 import com.hr.hrsystem.service.checkin.CheckinService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Tag(name = "Check-in API")
 public class CheckinController {
 
     private final CheckinService checkinService;

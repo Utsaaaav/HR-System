@@ -1,8 +1,7 @@
 package com.hr.hrsystem.service;
 
 import com.hr.hrsystem.entity.User;
-import com.hr.hrsystem.repo.UserRepo;
-import jakarta.transaction.Transactional;
+import com.hr.hrsystem.repo.user.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

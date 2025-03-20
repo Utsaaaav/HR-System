@@ -1,7 +1,6 @@
-package com.hr.hrsystem.service;
+package com.hr.hrsystem.service.user;
 
 import com.hr.hrsystem.dto.UserDto;
-import com.hr.hrsystem.entity.User;
 import com.hr.hrsystem.projection.UserProjection;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,9 @@
-package com.hr.hrsystem.service;
+package com.hr.hrsystem.service.user;
 
 import com.hr.hrsystem.dto.UserDto;
 import com.hr.hrsystem.entity.User;
 import com.hr.hrsystem.projection.UserProjection;
-import com.hr.hrsystem.repo.UserRepo;
+import com.hr.hrsystem.repo.user.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,6 +57,10 @@ public class UserServiceImpl implements UserService {
                     .id(u.getId())
                     .userName(u.getUserName())
                     .password(u.getPassword())
+                    .createdBy(u.getCreatedBy())
+                    .createdDate(u.getCreatedDate())
+                    .modifiedDate(u.getLastModifiedDate())
+                    .modifiedBy(u.getLastModifiedBy())
                     .build();
             userDto.add(us);
         }
@@ -85,13 +89,16 @@ public class UserServiceImpl implements UserService {
 
         User existingUser = optionalUser.get();
         existingUser.setUserName(userDto.getUserName());
-        existingUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        existingUser.setPassword((userDto.getPassword()));
+
 
         User user = userRepository.save(existingUser);
 
         UserDto u = UserDto.builder()
                 .userName(user.getUserName())
                 .password(user.getPassword())
+                .createdDate(user.getCreatedDate())
+                .modifiedDate(user.getLastModifiedDate())
                 .build();
     }
 
