@@ -27,7 +27,9 @@ public class CheckoutController {
         try{
 
             CheckoutDto checkoutDto = checkoutService.checkoutUser(userId);
+            System.out.println(checkoutDto);
             return ResponseEntity.ok(checkoutDto);
+
 
         }
         catch (Exception e){
